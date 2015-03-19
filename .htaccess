@@ -1,0 +1,7 @@
+<FilesMatch config.json>
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php
