@@ -19,19 +19,12 @@ class LogIn extends ThemiSQL {
 
     public function __construct()
     {
-        $this->setContent(ThemiSQL::FORMAT_CUSTOM, <<<'HTTP'
-<form action="" method="POST">
-    <div class="row">
-        <label class="six columns" for="user">User:</label>
-        <input type="text" class="six columns" name="user" id="user" required />
-    </div>
-    <div class="row">
-        <label class="six columns" for="pwd">Password:</label>
-        <input type="password" class="six columns" name="pwd" id="pwd" required />
-    </div>
-    <div class="row">
-HTTP
-                . '<input class="button-primary six columns" type="submit" value="' . Config::getPath(['gui', 'logIn']) . '"/><input class="six columns" type="reset" value="' . Config::getPath(['gui', 'reset']) . '"/></div></form>');
+        $output = '<form action="" method="POST"><div class="row"><label class="six columns" for="user">User:</label><input type="text" class="six columns" name="user" id="user" required /></div>';
+        
+        if(Config::get('no_password') !== TRUE)
+            $output .= '<div class="row"><label class="six columns" for="pwd">Password:</label><input type="password" class="six columns" name="pwd" id="pwd" required /></div>';
+
+        $this->setContent(ThemiSQL::FORMAT_CUSTOM, $output . '<div class="row"><input class="button-primary six columns" type="submit" value="' . Config::getPath(['gui', 'logIn'], ThemiSQL::MISSING_GUI) . '"/><input class="six columns" type="reset" value="' . Config::getPath(['gui', 'reset'], ThemiSQL::MISSING_GUI) . '"/></div></form>');
     }
 
     public function getTitle()

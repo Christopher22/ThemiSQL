@@ -26,7 +26,7 @@ class Form extends ThemiSQL {
              return;
         }
         
-        $result = '<form method="POST" action=""><input type="hidden" name="insert" value="i" /><input type="hidden" name="pwd" value="' . $connector->getPassword().  '" /><input type="hidden" name="user" value="' . $connector->getUser().  '" />' . "\n";
+        $result = '<form method="POST" action=""><input type="hidden" name="insert" value="i" /><input type="hidden" name="user" value="' . $connector->getUser().  '" />' . ($connector->getPassword() !== NULL ? '<input type="hidden" name="pwd" value="' . $connector->getPassword().  '" />' . "\n" : "\n");
 
         foreach ($columns as $column) 
         {
@@ -63,7 +63,7 @@ class Form extends ThemiSQL {
             }
         }
         
-        $result .= '<div class="row"><input class="six columns button-primary" type="submit" value="' . Config::getPath(['gui', 'insert']) . '"><input class="six columns" type="reset" value="' . Config::getPath(['gui', 'reset']) . '" /></div></form>';
+        $result .= '<div class="row"><input class="six columns button-primary" type="submit" value="' . Config::getPath(['gui', 'insert'], ThemiSQL::MISSING_GUI) . '"><input class="six columns" type="reset" value="' . Config::getPath(['gui', 'reset'], ThemiSQL::MISSING_GUI) . '" /></div></form>';
         $this->setContent(ThemiSQL::FORMAT_CUSTOM, $result);
     }
 }

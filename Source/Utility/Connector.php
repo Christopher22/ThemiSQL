@@ -19,7 +19,7 @@ class Connector {
 
     private $_lastError, $_sql, $_acc;
 
-    public function __construct($user, $password)
+    public function __construct($user, $password = NULL)
     {
         try {
             $this->_sql = new \PDO(Config::get('dsn'), $user, $password);
