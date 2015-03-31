@@ -7,7 +7,7 @@ $site = ThemiSQL\ThemiSQL::getSite();
     <meta charset="utf-8" />
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="skeleton.css" />
-    <link rel="stylesheet" href="Config/config.css" />
+    <link rel="stylesheet" href="<?= $site->getCSS() ?>" />
     <title><?= $site->getTitle() ?></title>
 </head>
 <body class="container">

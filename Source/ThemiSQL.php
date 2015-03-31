@@ -36,6 +36,11 @@ class ThemiSQL {
         return Config::getPath(['gui', 'title'], 'ThemiSQL');
     }
 
+    public final function getCSS()
+    {
+        return 'Config/' . Config::get('customCSS', 'config.css');
+    }
+    
     public final function setContent($format, $content = NULL)
     {
         if($format !== ThemiSQL::FORMAT_CUSTOM)
@@ -57,7 +62,14 @@ class ThemiSQL {
     public static function getSite()
     {
         require __DIR__ . '/Utility/Config.php';
-        Config::load();
+        if (\filter_has_var(\INPUT_GET, 'view'))
+        {
+            Config::load(\preg_replace('/[^A-Za-z0-9]/', '', \filter_input(\INPUT_GET, 'view', \FILTER_SANITIZE_STRING)) . '/config.json');
+            if(!Config::isValid())
+                Config::load();
+        }
+        else
+            Config::load();
         
         if (!\filter_has_var(\INPUT_POST, 'user'))
         {

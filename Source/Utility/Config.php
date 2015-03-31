@@ -24,11 +24,12 @@ abstract class Config {
         return self::$_data !== NULL;
     }
 
-    public static function load($path = '/../../Config/config.json')
+    public static function load($file = 'config.json')
     {
-        self::$_data = (\file_exists(__DIR__ . $path) ? \json_decode(\file_get_contents(__DIR__ . $path), TRUE) : NULL);
+        $path = __DIR__ . '/../../Config/' . $file;
+        self::$_data = (\file_exists($path) ? \json_decode(\file_get_contents($path), TRUE) : NULL);
     }
-    
+   
     public static function get($value, $onError = NULL)
     {
         return isset(self::$_data[$value]) ? self::$_data[$value] : $onError;
