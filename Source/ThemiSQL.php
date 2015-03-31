@@ -22,6 +22,8 @@ class ThemiSQL {
     const FORMAT_ERROR_USER = 400;
     const FORMAT_ERROR_SERVER = 500;
     
+    const MISSING_GUI = '<ThemiSQL: Missing>';
+    
     private $_content;
 
     public final function getContent()
@@ -31,7 +33,7 @@ class ThemiSQL {
 
     public function getTitle()
     {
-        return Config::getPath(['gui', 'title']);
+        return Config::getPath(['gui', 'title'], 'ThemiSQL');
     }
 
     public final function setContent($format, $content = NULL)
@@ -39,7 +41,7 @@ class ThemiSQL {
         if($format !== ThemiSQL::FORMAT_CUSTOM)
         {
             if($format === ThemiSQL::FORMAT_SUCCESS)
-                $output = Config::getPath(['msg', '!success']);
+                $output = Config::getPath(['msg', '!success'], 'Success');
             elseif(($output = Config::getPath(['msg', "$content"])) === NULL)
             {
                 \header("$_SERVER[SERVER_PROTOCOL] " . ($format === ThemiSQL::FORMAT_ERROR_USER ? 'Bad Request' : 'Internal Server Error'), TRUE, $content);
@@ -57,7 +59,7 @@ class ThemiSQL {
         require __DIR__ . '/Utility/Config.php';
         Config::load();
         
-        if (!\filter_has_var(\INPUT_POST, 'user') || !\filter_has_var(\INPUT_POST, 'pwd'))
+        if (!\filter_has_var(\INPUT_POST, 'user'))
         {
             require __DIR__ . '/LogIn.php';
             return new LogIn();

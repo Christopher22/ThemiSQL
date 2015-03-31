@@ -29,19 +29,19 @@ abstract class Config {
         self::$_data = (\file_exists(__DIR__ . $path) ? \json_decode(\file_get_contents(__DIR__ . $path), TRUE) : NULL);
     }
     
-    public static function get($value)
+    public static function get($value, $onError = NULL)
     {
-        return isset(self::$_data[$value]) ? self::$_data[$value] : NULL;
+        return isset(self::$_data[$value]) ? self::$_data[$value] : $onError;
     }
 
-    public static function getPath(array $path)
+    public static function getPath(array $path , $onError = NULL)
     {
         $tmp = &self::$_data;
         foreach($path as $value) {
             if(isset($tmp[$value]))
                 $tmp = &$tmp[$value];
             else
-                return NULL;
+                return $onError;
         }
         return $tmp;
     }
