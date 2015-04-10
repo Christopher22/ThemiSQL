@@ -11,6 +11,7 @@
          "reset" : "Reset"
     },
     "msg" : {
+	"!auth" : "You are not allowed to use this view!",
         "!success" : "Insert successfull!",
         "1045" : "Invalid username or password!"
     },
@@ -18,6 +19,9 @@
     "dsn" : "mysql:host=localhost;port=3306;dbname=themisql",
     "table" : "test",
     "no_password" : false,
+    "auth" : {
+        "method" : null
+    },
     "sql_values" : {
         "int" : {
             "type" : "number",
