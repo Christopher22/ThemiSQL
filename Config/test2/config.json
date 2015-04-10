@@ -1,27 +1,3 @@
 {
-    "query" : {
-        "column" : "SELECT COLUMN_NAME as 'column', IFNULL(NULLIF(COLUMN_COMMENT, ''), COLUMN_NAME) as 'label', DATA_TYPE as 'type' FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = :table",
-        "foreignKeys" : "SELECT COLUMN_NAME AS 'ref_column', REFERENCED_TABLE_NAME AS 'table', REFERENCED_COLUMN_NAME AS 'column' FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME = :table",
-        "canInsert" : "SELECT INSTR(`PRIVILEGES`, 'insert') > 0 AS CAN_INSERT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND COLUMN_NAME = :column"
-    },
-    "gui" : {
-         "title" : "ThemiSQL",
-         "logIn" : "Log in",
-         "insert" : "Insert",
-         "reset" : "Reset"
-    },
-    "msg" : {
-        "!success" : "Insert successfull!",
-        "1045" : "Invalid username or password!"
-    },
-    "dsn" : "mysql:host=localhost;port=3306;dbname=themisql",
-    "table" : "test",
-    "customCSS" : "test2/test2.css",
-    "no_password" : true,
-    "sql_values" : {
-        "int" : {
-            "type" : "number",
-            "value" : "0"
-        }
-    }
+    "css" : "test2/test2.css"
 }

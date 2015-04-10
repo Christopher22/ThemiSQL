@@ -27,7 +27,11 @@ abstract class Config {
     public static function load($file = 'config.json')
     {
         $path = __DIR__ . '/../../Config/' . $file;
-        self::$_data = (\file_exists($path) ? \json_decode(\file_get_contents($path), TRUE) : NULL);
+        $values = (\file_exists($path) ? \json_decode(\file_get_contents($path), TRUE) : NULL);
+        if(self::$_data !== NULL && $values !== NULL)
+            self::$_data = \array_merge (self::$_data, $values);
+        elseif($values !== NULL)
+            self::$_data = $values;
     }
    
     public static function get($value, $onError = NULL)
