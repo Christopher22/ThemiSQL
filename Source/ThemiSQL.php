@@ -71,10 +71,23 @@ class ThemiSQL {
             require __DIR__ . '/LogIn.php';
             return new LogIn();
         }
-        
+
+        $user = \filter_input(\INPUT_POST, 'user');
+        $password = \filter_input(\INPUT_POST, 'pwd');
+        if (Config::getPath(['auth', 'method']) !== NULL)
+        {
+            require __DIR__ . '/Authentication/Authenticator.php';
+            if (!Authenticator::isAuthenticated(Config::get('auth'), $user, $password))
+            {
+                $tmp = new ThemiSQL();
+                $tmp->setContent(ThemiSQL::FORMAT_ERROR_USER, '!auth');
+                return $tmp;
+            }
+        }
+
         require __DIR__ . '/Utility/Connector.php';
-        $connect = new Connector(\filter_input(\INPUT_POST, 'user'), \filter_input(\INPUT_POST, 'pwd'));
-        
+        $connect = new Connector($user, $password);
+
         if ($connect->getLastError() !== NULL)
         {
             $tmp = new ThemiSQL();
