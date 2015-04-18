@@ -63,8 +63,11 @@ class ThemiSQL {
     {
         require __DIR__ . '/Utility/Config.php';
         Config::load();
-        if (\filter_has_var(\INPUT_GET, 'view'))
-            Config::load(\preg_replace('/[^A-Za-z0-9]/', '', \filter_input(\INPUT_GET, 'view', \FILTER_SANITIZE_STRING)) . '/config.json');
+        if (\filter_has_var(\INPUT_GET, 'view') && Config::load(\preg_replace('/[^A-Za-z0-9]/', '', \filter_input(\INPUT_GET, 'view', \FILTER_SANITIZE_STRING)) . '/config.json') === FALSE)
+        {
+            \header("$_SERVER[SERVER_PROTOCOL] 404 Not Found", TRUE, 404);
+            Config::load('404/config.json');
+        }
 
         if (!\filter_has_var(\INPUT_POST, 'user'))
         {
