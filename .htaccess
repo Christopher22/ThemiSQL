@@ -5,7 +5,7 @@ Deny from all
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !^.*\..*$
+RewriteCond %{REQUEST_URI} ^.*\/[a-zA-Z0-9]+$
 RewriteRule ^(.*)$ index.php?view=$1 [L,NC,QSA]
 </IfModule>
 

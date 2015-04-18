@@ -69,6 +69,21 @@ class ThemiSQL {
             Config::load('404/config.json');
         }
 
+        if(($extra = Config::getPath(['site', 'method'])) !== NULL)
+        {
+            if($extra === 'redirect')
+            {
+                header('Location: ' . Config::getPath(['site', 'url'], 'http://example.com/'), TRUE);
+                exit();
+            }
+            elseif ($extra === 'html') 
+            {
+                $tmp = new ThemiSQL();
+                $tmp->setContent(ThemiSQL::FORMAT_CUSTOM, Config::getPath(['site', 'html'], 'Your custom HTML!'));
+                return $tmp;
+            }
+        }
+
         if (!\filter_has_var(\INPUT_POST, 'user'))
         {
             require __DIR__ . '/LogIn.php';

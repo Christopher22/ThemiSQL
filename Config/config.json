@@ -11,13 +11,17 @@
          "reset" : "Reset"
     },
     "msg" : {
-	"!auth" : "You are not allowed to use this view!",
+		"!auth" : "You are not allowed to use this view!",
         "!success" : "Insert successfull!",
         "1045" : "Invalid username or password!"
     },
     "css" : "config.css",
     "dsn" : "mysql:host=localhost;port=3306;dbname=themisql",
     "table" : "test",
+    "site" : {
+		"method" : "redirect",
+        "url" : "http://example.com"
+    },
     "no_password" : false,
     "auth" : {
         "method" : null
