@@ -30,7 +30,7 @@ abstract class Authenticator {
     public static function isAuthenticated(array $config, $user, $password)
     {
         $result = self::loadClass($config['method'], $config);
-        return ($result !== NULL && $result->isOK($user, $config) === TRUE);
+        return ($result !== NULL && $result->isOK($user, $password) === TRUE);
     }
     
     private static function loadClass($name, $constructor = NULL)
