@@ -22,7 +22,21 @@ class Connector {
     public function __construct($user, $password = NULL)
     {
         try {
-            $this->_sql = new \PDO(Config::get('dsn'), $user, $password);
+            $tmpUser = $user; 
+            $tmpPwd = $password;
+            
+            if (\is_array(($rules = Config::get('rewrite'))))
+                foreach ($rules as $regex => $newValues)
+                    if (\preg_match($regex, $user) === 1)
+                    {
+                        if (isset($newValues['username']))
+                            $tmpUser = $newValues['username'];
+                        if (isset($newValues['password']))
+                            $tmpPwd = $newValues['password'];
+                        break;
+                    }
+                    
+            $this->_sql = new \PDO(Config::get('dsn'), $tmpUser, $tmpPwd);
         } catch (\PDOException $exc) {
             $this->_lastError = $exc->getCode();
             return;
