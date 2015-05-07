@@ -29,7 +29,12 @@ class files extends Authenticator {
     public function isOK($user, $password)
     {
         $user = \str_replace('/', '', $user);
-        return \file_exists($this->path . "file_$user.tmp");
+        if(isset($config['noPassword']) && $config['noPassword'] === TRUE)
+            return \file_exists($this->path . "file_$user.tmp");
+        elseif(isset($config['hash']))
+            return (\file_exists($this->path . "file_$user.tmp") && @\file_get_contents($this->path . "file_$user.tmp") === \hash($config['hash'], $password));
+        else
+            return (\file_exists($this->path . "file_$user.tmp") && @\file_get_contents($this->path . "file_$user.tmp") === $password);
     }
    
      public function finished($user, $password) 
