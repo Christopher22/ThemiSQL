@@ -36,6 +36,11 @@ class ThemiSQL {
         return Config::getPath(['gui', 'title'], 'ThemiSQL');
     }
 
+    public final function getHeader()
+    {
+        return Config::get('header', '');
+    }
+    
     public final function getCSS()
     {
         return 'Config/' . Config::get('css', 'config.css');

@@ -9,6 +9,7 @@ $site = ThemiSQL\ThemiSQL::getSite();
     <link rel="stylesheet" href="skeleton.css" />
     <link rel="stylesheet" href="<?= $site->getCSS() ?>" />
     <title><?= $site->getTitle() ?></title>
+    <?= $site->getHeader(); ?>
 </head>
 <body class="container">
     <header class="row">
