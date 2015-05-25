@@ -37,7 +37,7 @@ class Insert extends ThemiSQL {
 
                 $column_list .= "$column[column], ";
                 $placeholders .= $placeholder . ', ';
-                $values[$placeholder] = \filter_input(\INPUT_POST, $column['column'], \FILTER_UNSAFE_RAW);
+                $values[$placeholder] = ((($inputValue = \trim(\filter_input(\INPUT_POST, $column['column'], \FILTER_UNSAFE_RAW))) !== '') ? $inputValue : NULL);             
             }
             else
             {
@@ -48,11 +48,12 @@ class Insert extends ThemiSQL {
 
         foreach ($foreign as $key => $value)
         {
-            if($value['canInsert'] && \filter_has_var(\INPUT_POST, $key) && $connector->query("INSERT IGNORE INTO $value[table]($value[column]) VALUES (:value)", array(':value' => \filter_input(\INPUT_POST, $key, \FILTER_UNSAFE_RAW))) === FALSE)
             {
                 $this->setContent(ThemiSQL::FORMAT_ERROR_USER, $connector->getLastError());
                 return;
             }
+            if($value['canInsert'] && ($inputValue = \trim(\filter_input(\INPUT_POST, $key, \FILTER_UNSAFE_RAW))) !== '')
+                if(!$connector->query("INSERT IGNORE INTO $value[table]($value[column]) VALUES (:value)", array(':value' => $inputValue), FALSE))
         }
         
         $column_list = \substr($column_list, 0, -2);

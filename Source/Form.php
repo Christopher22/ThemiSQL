@@ -50,7 +50,7 @@ class Form extends ThemiSQL {
                     $result .= "</datalist>\n";
                 }
                 
-                $result .= "<input required class=\"six columns\" id=\"$column[column]\" name=\"$column[column]\"" . (isset($foreign[$column['column']]) ? " list=\"$column[column]_data\" " : ' ');
+                $result .= "<input class=\"six columns\" id=\"$column[column]\" name=\"$column[column]\"" . (isset($foreign[$column['column']]) ? " list=\"$column[column]_data\" " : ' ');
                 if (isset($sql[$column['type']]) && \is_array($sql[$column['type']])) //Use custom config
                 {
                     foreach ($sql[$column['type']] as $key => $value) {
