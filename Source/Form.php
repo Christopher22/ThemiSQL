@@ -26,8 +26,8 @@ class Form extends ThemiSQL {
              return;
         }
         
-        $result = '<form method="POST" action=""><input type="hidden" name="insert" value="i" /><input type="hidden" name="user" value="' . $connector->getUser().  '" />' . ($connector->getPassword() !== NULL ? '<input type="hidden" name="pwd" value="' . $connector->getPassword().  '" />' . "\n" : "\n");
-
+        $result = '<form id="TSQL_form" method="POST" action=""><input type="hidden" name="insert" value="i" /><input type="hidden" name="user" value="' . $connector->getUser().  '" />' . ($connector->getPassword() !== NULL ? '<input type="hidden" name="pwd" value="' . $connector->getPassword().  '" />' . "\n" : "\n");
+    
         foreach ($columns as $column) 
         {
             $result .= "<div class=\"row\"><label class=\"six columns\" for=\"$column[column]\">$column[label]</label>";

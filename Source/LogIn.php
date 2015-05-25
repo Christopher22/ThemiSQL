@@ -19,7 +19,7 @@ class LogIn extends ThemiSQL {
 
     public function __construct()
     {
-        $output = '<form action="" method="POST"><div class="row"><label class="six columns" for="user">' . Config::getPath(['gui', 'username'], 'User:') . '</label><input type="text" class="six columns" name="user" id="user" required /></div>';
+        $output = '<form id="TSQL_login" action="" method="POST"><div class="row"><label class="six columns" for="user">' . Config::getPath(['gui', 'username'], 'User:') . '</label><input type="text" class="six columns" name="user" id="user" required /></div>';
         
         if(Config::get('no_password') !== TRUE)
             $output .= '<div class="row"><label class="six columns" for="pwd">' . Config::getPath(['gui', 'password'], 'Password:') . '</label><input type="password" class="six columns" name="pwd" id="pwd" required /></div>';
