@@ -90,7 +90,7 @@ class Connector {
         return $cache;
     }
 
-    public function query($preparedStatement, array $values)
+    public function query($preparedStatement, array $values, $query = TRUE)
     {
         try {
             $provider = $this->_sql->prepare($preparedStatement);
@@ -104,7 +104,7 @@ class Connector {
             return FALSE;
         }
 
-        return $provider->fetchAll(\PDO::FETCH_ASSOC);
+        return ($query ? $provider->fetchAll(\PDO::FETCH_ASSOC) : TRUE);
     }
 
     public function getColumns()

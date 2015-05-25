@@ -59,7 +59,7 @@ class Insert extends ThemiSQL {
         $placeholders = \substr($placeholders, 0, -2);
         $query = 'INSERT INTO ' . Config::get('table') . " ($column_list) VALUES ($placeholders)";
         
-        if ($connector->query($query, $values) !== FALSE)
+        if ($connector->query($query, $values, FALSE) !== FALSE)
         {
             if (Config::getPath(['auth', 'method']) !== NULL)
                 Authenticator::reportSuccess(Config::get('auth'), $connector->getUser(), $connector->getPassword());
